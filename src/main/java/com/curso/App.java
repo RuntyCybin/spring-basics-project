@@ -10,13 +10,13 @@ import com.curso.config.BeansConfiguration;
  */
 public class App {
 
-    private static final Utils utils = new Utils();
-    private final static ApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-            BeansConfiguration.class);
-    private static final Users user = applicationContext.getBean("users", Users.class);
+  private static final Utils utils = new Utils();
+  private final static ApplicationContext applicationContext = new AnnotationConfigApplicationContext(
+          BeansConfiguration.class);
+  private static final User user = applicationContext.getBean("users", User.class);
 
-    public static void main(String[] args) {
-        utils.processMenuOption(user);
-    }
+  public static void main(String[] args) {
+    utils.processMenuOption(user);
+  }
 
 }

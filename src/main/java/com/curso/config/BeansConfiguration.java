@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.curso.RolAdmin;
 import com.curso.RolNormal;
-import com.curso.Users;
+import com.curso.User;
 
 @Configuration
 public class BeansConfiguration {
@@ -17,22 +17,22 @@ public class BeansConfiguration {
 
   @Bean
   public RolNormal normalRol() {
-    return new RolNormal("normal");
+    return new RolNormal();
   }
 
   @Bean
   public RolAdmin adminRol() {
-    return new RolAdmin("admin");
+    return new RolAdmin();
   }
 
   @Bean
-  public Users normalUser() {
-    return new Users(this.normalRol(), "Default User");
+  public User normalUser() {
+    return new User(this.normalRol(), "Default User");
   }
 
   @Bean
-  public Users adminUser() {
-    return new Users(this.adminRol(), "Admin User");
+  public User adminUser() {
+    return new User(this.adminRol(), "Admin User");
   }
 
   @Bean

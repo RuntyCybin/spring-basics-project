@@ -18,7 +18,7 @@ public class Utils {
     System.out.print("Select option: ");
   }
 
-  public void processMenuOption(Users user) {
+  public void processMenuOption(User user) {
     int opt = 0;
     do {
       this.launchMenu();

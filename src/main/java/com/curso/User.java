@@ -1,14 +1,15 @@
 package com.curso;
 
-public class Users implements UsersInterface {
+public class User implements UsersInterface {
 
+  private RolType rolType;
   private RolesInterface role;
   private String name;
 
-  public Users() {
+  public User() {
   }
 
-  public Users(RolesInterface ri, String n) {
+  public User(RolesInterface ri, String n) {
     this.role = ri;
     this.name = n;
   }
@@ -27,15 +28,15 @@ public class Users implements UsersInterface {
   public void readUserData() {
     System.out.println("Reading user data...");
 
-    System.out.println("Please enter your role (admin/normal): ");
+    System.out.println("Enter your role (admin/normal): ");
     final String role = Utils.scanner.nextLine().trim().toLowerCase();
     if (role.equals("admin")) {
-      this.setRole(new RolAdmin(role));
+      this.setRole(new RolAdmin());
     } else if (role.equals("normal")) {
-      this.setRole(new RolNormal(role));
+      this.setRole(new RolNormal());
     } else {
       System.out.println("Invalid role. Defaulting to normal user.");
-      this.setRole(new RolNormal("normal"));
+      this.setRole(new RolNormal());
     }
     System.out.print("Enter your user name: ");
     final String name = Utils.scanner.nextLine();

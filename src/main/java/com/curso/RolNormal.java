@@ -2,10 +2,9 @@ package com.curso;
 
 public class RolNormal implements RolesInterface {
 
-    private final String name;
+    private final String name = "normal";
 
-    public RolNormal(String n) {
-        this.name = n;
+    public RolNormal() {
     }
 
     @Override
