@@ -25,7 +25,7 @@ public class Utils {
   }
 
   public void processMenuOption(User user) {
-    int opt = 0;
+    int opt;
     do {
       System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::");
       this.launchMenu();
@@ -34,12 +34,12 @@ public class Utils {
       System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::");
       switch (opt) {
         case 1:
-          System.out.println("Processing a user");
+          System.out.println(":::::::::::::::::::::::Reading a user::::::::::::::::::");
           user = this.userService.readUserData();
           break;
 
         case 2:
-          System.out.println("Printing a user");
+          System.out.println(":::::::::::::::::::::::Printing a user::::::::::::::::");
           user.printUserData();
           break;
 

@@ -9,8 +9,6 @@ public class UserService {
   }
 
   public User readUserData() {
-    System.out.println("Reading user data...");
-
     final User user = new User();
 
     // PROCESS ROLE
