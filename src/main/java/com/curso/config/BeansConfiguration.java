@@ -1,13 +1,9 @@
 package com.curso.config;
 
-import com.curso.LRUCache;
+import com.curso.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.curso.RolAdmin;
-import com.curso.RolNormal;
-import com.curso.User;
 
 @Configuration
 public class BeansConfiguration {
@@ -26,8 +22,13 @@ public class BeansConfiguration {
   }
 
   @Bean
+  public User genericUser() {
+    return new User();
+  }
+
+  @Bean
   public User normalUser() {
-    return new User(this.normalRol(), "Default User");
+    return new User(this.normalRol(), "Normal User");
   }
 
   @Bean
@@ -38,6 +39,11 @@ public class BeansConfiguration {
   @Bean
   public LRUCache<String, Object> lruCache() {
     return new LRUCache<>(this.lruCacheCapacity);
+  }
+
+  @Bean
+  public UserService userService() {
+    return new UserService();
   }
 
 }

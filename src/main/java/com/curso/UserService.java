@@ -7,4 +7,31 @@ public class UserService {
   public void writeUserToCache(User user) {
     this.lruCache.put(user.getName(), user.getRole());
   }
+
+  public User readUserData() {
+    System.out.println("Reading user data...");
+
+    final User user = new User();
+
+    // PROCESS ROLE
+    System.out.print("Enter your role (admin/normal): ");
+    final String role = Utils.scanner.nextLine();
+    final String roleaux = role.trim().toLowerCase();
+
+    if (roleaux.equals("admin")) {
+      user.setRole(new RolAdmin());
+    } else if (roleaux.equals("normal")) {
+      user.setRole(new RolNormal());
+    } else {
+      System.out.println("Invalid role. Defaulting to normal user.");
+      user.setRole(new RolNormal());
+    }
+
+    // PROCESS USERNAME
+    System.out.print("Enter your user name: ");
+    final String name = Utils.scanner.nextLine();
+    user.setName(name);
+
+    return user;
+  }
 }
