@@ -2,7 +2,7 @@ package com.curso;
 
 public class RolAdmin implements RolesInterface {
 
-    private String name;
+    private final String name;
 
     public RolAdmin(String n) {
         this.name = n;

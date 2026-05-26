@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Utils {
 
-  public final Scanner scanner = new Scanner(System.in);
+  public static final Scanner scanner = new Scanner(System.in);
 
   /**
    * This method is used to launch the main menu of the application.
@@ -21,25 +21,27 @@ public class Utils {
   public void processMenuOption(Users user) {
     int opt = 0;
     do {
-      launchMenu();
-      opt = scanner.nextInt();
+      this.launchMenu();
+      opt = this.scanner.nextInt();
       switch (opt) {
         case 1:
-          System.out.println("WAIT FOR SOME TIME");
+          System.out.println("Processing a user");
           user.readUserData();
           break;
 
         case 2:
-          System.out.println("WAIT FOR SOME TIME");
+          System.out.println("Printing a user");
           user.printUserData();
           break;
 
         default:
+          System.out.println("Exiting application...");
+          opt = 0;
           break;
       }
 
-    } while (opt != 9);
-    scanner.close();
+    } while (opt != 0);
+    this.scanner.close();
   }
 
 }

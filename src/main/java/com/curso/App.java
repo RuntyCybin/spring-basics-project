@@ -13,14 +13,10 @@ public class App {
     private static final Utils utils = new Utils();
     private final static ApplicationContext applicationContext = new AnnotationConfigApplicationContext(
             BeansConfiguration.class);
-
-    static RolAdmin rolAdmin = applicationContext.getBean(RolAdmin.class);
-    static RolNormal rolNormal = applicationContext.getBean(RolNormal.class);
-    static Users auxuser = applicationContext.getBean("users", Users.class);
+    private static final Users user = applicationContext.getBean("users", Users.class);
 
     public static void main(String[] args) {
-
-        utils.processMenuOption(auxuser);
+        utils.processMenuOption(user);
     }
 
 }

@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 
 public class LRUCache<K, V> extends LinkedHashMap<K, V> {
 
+  private static final long serialVersionUID = -4276040638886380391L;
   private final int capacity;
 
   public LRUCache(int capacity) {
@@ -13,6 +14,6 @@ public class LRUCache<K, V> extends LinkedHashMap<K, V> {
 
   @Override
   protected boolean removeEldestEntry(java.util.Map.Entry<K, V> eldest) {
-    return size() > capacity;
+    return this.size() > this.capacity;
   }
 }

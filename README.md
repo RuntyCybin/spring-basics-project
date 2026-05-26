@@ -14,16 +14,16 @@ Proyecto de práctica para repasar los fundamentos de Spring Core y patrones de 
 ```
 src/main/java/com/curso/
 ├── config/
-│   └── BeansConfiguration.java   # Configuración de beans con @Configuration
-├── App.java                       # Punto de entrada, inicializa el ApplicationContext
-├── RolesInterface.java            # Interfaz que deben implementar los roles
-├── RolAdmin.java                  # Bean: rol administrador
-├── RolNormal.java                 # Bean: rol normal
-├── UsersInterface.java            # Interfaz de usuario
-├── Users.java                     # Bean: usuario con rol asignado
-├── Utils.java                     # Menú interactivo por consola
-├── LRUCache.java                  # Implementación de caché LRU sobre LinkedHashMap
-└── UserScene.java                 # Clase auxiliar (en desarrollo)
+│   └── BeansConfiguration.java     # Configuración de beans con @Configuration
+├── App.java                        # Punto de entrada, inicializa el ApplicationContext
+├── RolesInterface.java             # Interfaz que deben implementar los roles
+├── RolAdmin.java                   # Bean: rol administrador
+├── RolNormal.java                  # Bean: rol normal
+├── UsersInterface.java             # Interfaz de usuario
+├── Users.java                      # Bean: usuario con rol asignado
+├── Utils.java                      # Menú interactivo por consola
+├── LRUCache.java                   # Implementación de caché LRU sobre LinkedHashMap
+└── UserScene.java                  # Clase auxiliar (en desarrollo)
 ```
 
 ## Conceptos que cubre
