@@ -40,7 +40,7 @@ public class Utils {
 
         case 2:
           System.out.println(":::::::::::::::::::::::Printing a user::::::::::::::::");
-          user.printUserData();
+          this.userService.readUsersCache();
           break;
 
         default:
