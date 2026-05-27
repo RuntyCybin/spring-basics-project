@@ -43,7 +43,7 @@ public class BeansConfiguration {
 
   @Bean
   public UserService userService() {
-    return new UserService();
+    return new UserService(this.lruCacheCapacity);
   }
 
 }

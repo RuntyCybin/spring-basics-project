@@ -1,13 +1,12 @@
 package com.curso;
 
-import org.springframework.beans.factory.annotation.Value;
-
 public class UserService {
 
-  @Value("${lrucache.capacity:100}")
-  private int lruCacheCapacity;
+  private final LRUCache<String, Object> lruCache;
 
-  private final LRUCache<String, Object> lruCache = new LRUCache<>(this.lruCacheCapacity);
+  public UserService(int tamCache) {
+    this.lruCache = new LRUCache<>(tamCache);
+  }
 
   public void writeUserToCache(User user) {
     this.lruCache.put(user.getName(), user.getRole());
@@ -29,17 +28,8 @@ public class UserService {
 
     // PROCESS ROLE
     System.out.print("Enter your role (admin/normal): ");
-    final String role = Utils.scanner.nextLine();
-    final String roleaux = role.trim().toLowerCase();
-
-    if (roleaux.equals("admin")) {
-      user.setRole(new RolAdmin());
-    } else if (roleaux.equals("normal")) {
-      user.setRole(new RolNormal());
-    } else {
-      System.out.println("Invalid role. Defaulting to normal user.");
-      user.setRole(new RolNormal());
-    }
+    final String role = Utils.scanner.nextLine().trim().toLowerCase();
+    user.setRole(this.checkRole(role));
 
     // PROCESS USERNAME
     System.out.print("Enter your user name: ");
@@ -49,5 +39,16 @@ public class UserService {
     this.writeUserToCache(user);
 
     return user;
+  }
+
+  private RolesInterface checkRole(String roleaux) {
+    return switch (roleaux) {
+      case "admin" -> new RolAdmin();
+      case "normal" -> new RolNormal();
+      default -> {
+        System.out.println("Invalid role. Defaulting to normal user.");
+        yield new RolNormal();
+      }
+    };
   }
 }
