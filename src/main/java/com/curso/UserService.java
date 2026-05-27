@@ -1,8 +1,13 @@
 package com.curso;
 
+import org.springframework.beans.factory.annotation.Value;
+
 public class UserService {
 
-  private final LRUCache<String, Object> lruCache = new LRUCache<>(100);
+  @Value("${lrucache.capacity:100}")
+  private int lruCacheCapacity;
+
+  private final LRUCache<String, Object> lruCache = new LRUCache<>(this.lruCacheCapacity);
 
   public void writeUserToCache(User user) {
     this.lruCache.put(user.getName(), user.getRole());
