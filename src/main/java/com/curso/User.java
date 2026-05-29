@@ -14,8 +14,8 @@ public class User implements UsersInterface {
   public User() {
   }
 
-  public User(RolesInterface ri, String n) {
-    this.role = ri;
+  public User(RolesInterface r, String n) {
+    this.role = r;
     this.name = n;
   }
 

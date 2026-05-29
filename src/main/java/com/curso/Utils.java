@@ -17,8 +17,9 @@ public class Utils {
    */
   public void launchLoginMenu() {
     System.out.println("Login menu");
-    System.out.println("1. input user data");
-    System.out.println("2. print user data");
+    System.out.println("1. input user data manually");
+    System.out.println("2. print user data from cache");
+    System.out.println("3. import user data from file");
     System.out.println("0. Quit:");
     System.out.print("Select option: ");
   }
@@ -38,13 +39,13 @@ public class Utils {
           break;
 
         case 2:
-          System.out.println(":::::::::::::::::::::::Printing users from cache::::::::::::::::");
+          System.out.println(":::::::::::::Printing users from cache::::::::::::::::");
           this.userService.readUsersFromCache();
           break;
 
         case 3:
-          System.out.println(":::::::::::::::::::::::Import users from file::::::::::::::::");
-
+          System.out.println("::::::::::::::::Import users from file::::::::::::::::");
+          this.userService.readFromFile();
           break;
 
         default:

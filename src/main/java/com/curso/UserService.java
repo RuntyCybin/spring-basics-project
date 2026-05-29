@@ -1,8 +1,10 @@
 package com.curso;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 
 public class UserService {
 
@@ -56,5 +58,28 @@ public class UserService {
     };
   }
 
+  public void readFromFile() {
+    final Path path = Path.of(
+            Objects.requireNonNull(
+                    this.getClass().getClassLoader().getResource("users-import.users")).getPath());
+    try (final BufferedReader reader = Files.newBufferedReader(path)) {
+      String line;
+      while ((line = reader.readLine()) != null) {
+        final String name = line.trim().substring(0, line.indexOf(":"));
+        final String role = line.trim().substring(line.indexOf(":") + 1);
+        System.out.println("NAME: " + name + " ROLE: " + role);
+        final RolesInterface rolesInterface;
+        if ("admin".equals(role)) {
+          rolesInterface = new RolAdmin();
+        } else {
+          rolesInterface = new RolNormal();
+        }
+        final User user = new User(rolesInterface, name);
+        this.writeUserToCache(user);
+      }
+    } catch (final IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
 
 }
