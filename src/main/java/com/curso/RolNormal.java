@@ -2,7 +2,7 @@ package com.curso;
 
 public class RolNormal implements RolesInterface {
 
-    private final String name = "normal";
+    private final RolType roleName = RolType.ROL_NORMAL;
 
     public RolNormal() {
     }
@@ -14,7 +14,7 @@ public class RolNormal implements RolesInterface {
 
     @Override
     public void printRoleName() {
-        System.out.println("The ROL name is: " + this.name);
+        System.out.println("The ROL name is: " + this.roleName);
     }
 
 }
