@@ -26,7 +26,8 @@ public class User implements UsersInterface {
   public void printUserData() {
     System.out.println("The user name is: " + this.getName());
     this.getRole().printRoleName();
-    this.getRole().saludo();
+    System.out.println("The user password is: " + this.getPassword());
+    System.out.println("--");
   }
 
   /**

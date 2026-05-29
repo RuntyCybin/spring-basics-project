@@ -20,6 +20,7 @@ public class Utils {
     System.out.println("1. input user data manually");
     System.out.println("2. print user data from cache");
     System.out.println("3. import user data from file");
+    System.out.println("4. export users to file");
     System.out.println("0. Quit:");
     System.out.print("Select option: ");
   }
@@ -46,6 +47,10 @@ public class Utils {
         case 3:
           System.out.println("::::::::::::::::Import users from file::::::::::::::::");
           this.userService.readFromFile();
+          break;
+
+        case 4:
+          System.out.println("::::::::::::::::Export users to file::::::::::::::::::");
           break;
 
         default:

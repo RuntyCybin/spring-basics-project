@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.Objects;
 
 public class UserService {
@@ -15,20 +16,24 @@ public class UserService {
   }
 
   public void writeUserToCache(User user) {
-    this.lruCache.put(user.getName(), user.getRole());
+    this.lruCache.put(user.getName(), user);
   }
 
+  /*
+  * READ A USERS FROM CACHE
+  * iterates and prints the whole cache
+  */
   public void readUsersFromCache() {
-    for (final java.util.Map.Entry<String, Object> entry : this.lruCache.entrySet()) {
-      final String rol = switch (entry.getValue()) {
-        case RolAdmin ra -> "Rol Administrador";
-        case RolNormal rn -> "Rol Normal";
-        default -> "UNKNOWN";
-      };
-      System.out.println("Nombre: " + entry.getKey() + " - " + rol);
+    for (final Map.Entry<String, Object> entry : this.lruCache.entrySet()) {
+      final User user = (User) entry.getValue();
+      user.printUserData();
     }
   }
 
+  /*
+  * READ USER FROM CONSOLE
+  * input all user data manually from console
+  */
   public User readUserDataManually() {
     final User user = new User();
 
@@ -41,6 +46,11 @@ public class UserService {
     System.out.print("Enter your user name: ");
     final String name = Utils.scanner.nextLine();
     user.setName(name);
+
+    // PROCESS PASSWORD
+    System.out.print("Enter your password: ");
+    final String pwd = Utils.scanner.nextLine();
+    user.setPassword(pwd);
 
     this.writeUserToCache(user);
 
@@ -58,6 +68,10 @@ public class UserService {
     };
   }
 
+  /*
+  * READ USERS FROM A FILE
+  * reads a file with '.users' extension line by line
+  */
   public void readFromFile() {
     final Path path = Path.of(
             Objects.requireNonNull(
@@ -65,21 +79,34 @@ public class UserService {
     try (final BufferedReader reader = Files.newBufferedReader(path)) {
       String line;
       while ((line = reader.readLine()) != null) {
-        final String name = line.trim().substring(0, line.indexOf(":"));
-        final String role = line.trim().substring(line.indexOf(":") + 1);
-        System.out.println("NAME: " + name + " ROLE: " + role);
+        final String[] fields = line.split(":");
+
+        System.out.println("NAME: " + fields[0] + " PWD: " + fields[1] + " ROLE: " + fields[2]);
+
         final RolesInterface rolesInterface;
-        if ("admin".equals(role)) {
+        if ("admin".equals(fields[2])) {
           rolesInterface = new RolAdmin();
         } else {
           rolesInterface = new RolNormal();
         }
-        final User user = new User(rolesInterface, name);
+        final User user = new User();
+        user.setName(fields[0]);
+        user.setPassword(fields[1]);
+        user.setRole(rolesInterface);
+
+        // write User to cache
         this.writeUserToCache(user);
       }
     } catch (final IOException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  public void writeUsersToFile() {
+    final Path path = Path.of(
+            Objects.requireNonNull(
+                    this.getClass().getClassLoader().getResource("users-import.users")).getPath());
+
   }
 
 }
