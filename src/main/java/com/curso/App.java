@@ -12,12 +12,11 @@ public class App {
 
   private final static ApplicationContext applicationContext = new AnnotationConfigApplicationContext(
           BeansConfiguration.class);
-  private static final User user = applicationContext.getBean("genericUser", User.class);
   private static final UserService userService = applicationContext.getBean("userService", UserService.class);
   private static final Utils utils = new Utils(userService);
 
   public static void main(String[] args) {
-    utils.processMenuOption(user);
+    utils.processMenuOption();
   }
 
 }

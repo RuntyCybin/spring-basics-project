@@ -1,5 +1,9 @@
 package com.curso;
 
+import java.io.BufferedReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class UserService {
 
   private final LRUCache<String, Object> lruCache;
@@ -12,18 +16,18 @@ public class UserService {
     this.lruCache.put(user.getName(), user.getRole());
   }
 
-  public void readUsersCache() {
+  public void readUsersFromCache() {
     for (final java.util.Map.Entry<String, Object> entry : this.lruCache.entrySet()) {
       final String rol = switch (entry.getValue()) {
         case RolAdmin ra -> "Rol Administrador";
         case RolNormal rn -> "Rol Normal";
         default -> "UNKNOWN";
       };
-      System.out.println(entry.getKey() + " - " + rol);
+      System.out.println("Nombre: " + entry.getKey() + " - " + rol);
     }
   }
 
-  public User readUserData() {
+  public User readUserDataManually() {
     final User user = new User();
 
     // PROCESS ROLE
@@ -51,4 +55,6 @@ public class UserService {
       }
     };
   }
+
+
 }

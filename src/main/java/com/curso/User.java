@@ -1,9 +1,16 @@
 package com.curso;
 
 public class User implements UsersInterface {
+  /**
+   * ATTRIBUTES
+   */
   private RolesInterface role;
   private String name;
+  private String password;
 
+  /**
+   * CONSTRUCTORS
+   */
   public User() {
   }
 
@@ -12,14 +19,12 @@ public class User implements UsersInterface {
     this.name = n;
   }
 
-  @Override
-  public void printUserame() {
-    System.out.println("The user name is: " + this.getName());
-  }
-
+  /**
+   * METHOD IMPLEMENTS
+   */
   @Override
   public void printUserData() {
-    this.printUserame();
+    System.out.println("The user name is: " + this.getName());
     this.getRole().printRoleName();
     this.getRole().saludo();
   }
@@ -43,4 +48,11 @@ public class User implements UsersInterface {
     this.name = name;
   }
 
+  public String getPassword() {
+    return this.password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
 }
