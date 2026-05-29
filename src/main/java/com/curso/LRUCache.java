@@ -1,9 +1,11 @@
 package com.curso;
 
+import java.io.Serial;
 import java.util.LinkedHashMap;
 
 public class LRUCache<K, V> extends LinkedHashMap<K, V> {
 
+  @Serial
   private static final long serialVersionUID = -4276040638886380391L;
   private final int capacity;
 
