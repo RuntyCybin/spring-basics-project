@@ -1,6 +1,7 @@
 package com.curso;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,7 +20,7 @@ public class UserService {
     this.lruCache.put(user.getName(), user);
   }
 
-  /*
+  /**
   * READ A USERS FROM CACHE
   * iterates and prints the whole cache
   */
@@ -30,7 +31,7 @@ public class UserService {
     }
   }
 
-  /*
+  /**
   * READ USER FROM CONSOLE
   * input all user data manually from console
   */
@@ -68,7 +69,7 @@ public class UserService {
     };
   }
 
-  /*
+  /**
   * READ USERS FROM A FILE
   * reads a file with '.users' extension line by line
   */
@@ -102,11 +103,24 @@ public class UserService {
     }
   }
 
+  /**
+   * WRITE USERS FROM CACHE TO FILE
+   * */
   public void writeUsersToFile() {
     final Path path = Path.of(
             Objects.requireNonNull(
                     this.getClass().getClassLoader().getResource("users-import.users")).getPath());
 
+    try (final BufferedWriter writer = Files.newBufferedWriter(path)) {
+      for (final Map.Entry<String, Object> entry : this.lruCache.entrySet()) {
+        final User user = (User) entry.getValue();
+        final String cadena = user.getName() + ":" + user.getPassword() + ":" + user.getRole();
+        writer.write(cadena);
+        writer.newLine();
+      }
+    } catch (final IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
 }
